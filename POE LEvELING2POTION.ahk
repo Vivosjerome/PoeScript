@@ -78,13 +78,13 @@ Loop{
 
 
         ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-        else if ((couleur3 == popo3) && duree3 != 0x99D7F9 && duree3 != 0x99D7F9) {
+        else if ((couleur3 == popo3) && duree3 != 0x99D7F9 && duree4 != 0x99D7F9) {
             Send, 4
             Sleep, 100
         } 
 
         ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-        else if ((couleur4 == popo4) && duree4!= 0x99D7F9 && duree2 != 0x99D7F9) {
+        else if ((couleur4 == popo4) && duree4!= 0x99D7F9 && duree3 != 0x99D7F9) {
             Send, 5
             Sleep, 100
         }
