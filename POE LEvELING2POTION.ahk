@@ -8,14 +8,14 @@ pourcentage_seuil_mana := 30
 global staticAdress := 0x2DF0E20
 global staticAdressReservation := 0x30575A8
 global manaSave
+global duree2
 global duree3
-global duree4
+global dureeCouleur2
 global dureeCouleur3
-global dureeCouleur4
+global potion2
 global potion3
-global potion4
+global couleur2
 global couleur3
-global couleur4
 
 staticOffsetAll := [0x0, 0x130, 0x240, 0x8, 0x10, 0x20]
 
@@ -37,11 +37,13 @@ Loop{
     if !hProcessCopy
         msgbox Erreur ouverture du. Error Code = %hProcessCopy%
         
+    PixelGetColor, popo1, X_Potion1, Y_Potion1
+    PixelGetColor, popo2, X_Potion2, Y_Potion2
     PixelGetColor, popo3, X_Potion3, Y_Potion3
-    PixelGetColor, popo4, X_Potion4, Y_Potion4
 
+    PixelGetColor, duree1, X_Duree1, Y_Duree1
+    PixelGetColor, duree2, X_Duree2, Y_Duree2
     PixelGetColor, duree3, X_Duree3, Y_Duree3
-    PixelGetColor, duree4, X_Duree4, Y_Duree4
 
     ; Afficher les valeurs sur l'écran
     ToolTip, %reservMana%`n%life%/%lifeMax%`n%mana%/%manaMax%, 115, 720
@@ -76,15 +78,14 @@ Loop{
             takeLife()
         }
 
-
         ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-        else if ((couleur3 == popo3) && duree3 != 0x99D7F9 && duree4 != 0x99D7F9) {
+        else if ((couleur2 == popo2) && duree2 != 0x99D7F9 && duree3 != 0x99D7F9) {
             Send, 4
             Sleep, 100
         } 
 
         ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-        else if ((couleur4 == popo4) && duree4!= 0x99D7F9 && duree3 != 0x99D7F9) {
+        else if ((couleur3 == popo3) && duree3!= 0x99D7F9 && duree2 != 0x99D7F9) {
             Send, 5
             Sleep, 100
         }
@@ -114,4 +115,4 @@ Loop{
         SetTimer, RemoveToolTip, Off
     return
 
-    #Include, FindStaticAdresseAutoLEVELING2POTION.ahk
+    #Include, FindStaticAdresseAutoLEVELING.ahk

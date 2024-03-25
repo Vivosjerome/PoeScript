@@ -3,55 +3,58 @@
 
 ; Enregistrement des options dans un fichier
 SaveNewStaticAdress() {
-    FileDelete, ConfigLEVELING2POTION.txt
+    FileDelete, TEST.txt
     ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
-    FileAppend,%duree3%`n%dureeCouleur3%`n%duree4%`n%dureeCouleur4%`n%potion3%`n%couleur3%`n%potion4%`n%couleur4%, ConfigLEVELING2POTION.txt
+    FileAppend,%duree2%`n%dureeCouleur2%`n%duree3%`n%dureeCouleur3%`n%potion2%`n%couleur2%`n%potion3%`n%couleur3%, TEST.txt
 }
 
 LoadOptions() {
-    FilePath := "ConfigLEVELING2POTION.txt"
+    FilePath := "TEST.txt"
     if (FileExist(FilePath)) {
-        FileReadLine, duree3, %FilePath%, 1
-        FileReadLine, dureeCouleur3, %FilePath%, 2
-        FileReadLine, duree4, %FilePath%, 3
-        FileReadLine, dureeCouleur4, %FilePath%, 4
+        FileReadLine, duree2, %FilePath%, 1
+        FileReadLine, dureeCouleur2, %FilePath%, 2
+        FileReadLine, duree3, %FilePath%, 3
+        FileReadLine, dureeCouleur3, %FilePath%, 4
         ; Lire les trois premières lignes
+        FileReadLine, potion2, %FilePath%, 5
+        FileReadLine, couleur2, %FilePath%, 6
         FileReadLine, potion3, %FilePath%, 7
         FileReadLine, couleur3, %FilePath%, 8
-        FileReadLine, potion4, %FilePath%, 9
-        FileReadLine, couleur4, %FilePath%, 10
 
+        
     }
 
-
+    global X_Duree2
+    global Y_Duree2
+    
     global X_Duree3
     global Y_Duree3
+    
+    global X_Potion1
+    global Y_Potion1
 
-    global X_Duree4
-    global Y_Duree4
+    global X_Potion2
+    global Y_Potion2
     
     global X_Potion3
     global Y_Potion3
 
-    global X_Potion4
-    global Y_Potion4
-
     ; Initialiser les coordonnées X et Y pour chaque potion
+    CutePos(duree2)
+    X_Duree2 := X
+    Y_Duree2 := Y
+    
     CutePos(duree3)
     X_Duree3 := X
     Y_Duree3 := Y
-
-    CutePos(duree4)
-    X_Duree4 := X
-    Y_Duree4:= Y
+    
+    CutePos(potion2)
+    X_Potion2 := X
+    Y_Potion2 := Y
     
     CutePos(potion3)
     X_Potion3 := X
     Y_Potion3 := Y
-
-    CutePos(potion4)
-    X_Potion4 := X
-    Y_Potion4 := Y
     
 }
 
@@ -63,26 +66,26 @@ PotionPos(){
     ; Enregistrement et affichage de la position
     Input, _, L1
     MouseGetPos, X, Y
+    duree2 := X "," Y
+    PixelGetColor, dureeCouleur2, %X%, %Y%
+
+    ; Enregistrement et affichage de la position
+    Input, _, L1
+    MouseGetPos, X, Y
     duree3 := X "," Y
     PixelGetColor, dureeCouleur3, %X%, %Y%
 
     ; Enregistrement et affichage de la position
     Input, _, L1
     MouseGetPos, X, Y
-    duree4 := X "," Y
-    PixelGetColor, dureeCouleur4, %X%, %Y%
+    potion2 := X "," Y
+    PixelGetColor, couleur2, %X%, %Y%
 
     ; Enregistrement et affichage de la position
     Input, _, L1
     MouseGetPos, X, Y
     potion3 := X "," Y
     PixelGetColor, couleur3, %X%, %Y%
-
-    ; Enregistrement et affichage de la position
-    Input, _, L1
-    MouseGetPos, X, Y
-    potion4 := X "," Y
-    PixelGetColor, couleur4, %X%, %Y%
 
     MsgBox, Position et couleur sauvegarde.
 
