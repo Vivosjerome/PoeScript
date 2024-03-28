@@ -289,7 +289,7 @@ Update(){
         MsgBox, some other crazy error occured. 
 
     ; Décompresse le fichier zip dans le dossier update
-    RunWait, %ComSpec% /c powershell Expand-Archive -Path "%A_ScriptDir%\update.zip" -DestinationPath "%A_ScriptDir%\update", , Hide
+    RunWait, %ComSpec% /c powershell -Command "Expand-Archive -Path '%A_ScriptDir%\update.zip' -DestinationPath '%A_ScriptDir%\update'", , Hide
     ; Supprime l'ancien fichier YourScript.exe s'il existe
     FileMove, %A_ScriptDir%\update\PoeScript-main\*, %A_ScriptDir%\, 1
     ; Supprime le fichier zip et le dossier update
