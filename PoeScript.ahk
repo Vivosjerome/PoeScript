@@ -123,10 +123,10 @@ F2::reload
 
 ^F9::SaveSpeed()
 
-^F1::Potion1()
-^F2::Potion2()
-^F3::Potion3()
-^F4::Potion4()
+^F2::Potion1()
+^F3::Potion2()
+^F4::Potion3()
+^F5::Potion4()
 ^!F10::DeleteAllPotion()
 
 XButton2::
