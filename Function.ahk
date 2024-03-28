@@ -27,9 +27,9 @@ global Y_Potion4
 
 ; Enregistrement des options dans un fichier
 SavePotionSpeed() {
-    FileDelete, potionSpeedConfig.txt
+    FileDelete,  %A_ScriptDir%\Config\potionSpeedConfig.txt
     ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
-    FileAppend,%duree1%`n%duree2%`n%duree3%`n%duree4%, potionSpeedConfig.txt
+    FileAppend,%duree1%`n%duree2%`n%duree3%`n%duree4%, %A_ScriptDir%\Config\potionSpeedConfig.txt
 }
 
 SaveSpeed(){
@@ -52,32 +52,39 @@ SaveSpeed(){
 
 
 SavePotion1(){
-    FileDelete, potion1.txt
+    FileDelete, %A_ScriptDir%\Config\potion1.txt
     ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
-    FileAppend,%popo1%`n%couleur1%, potion1.txt
+    FileAppend, %popo1%`n%couleur1%, %A_ScriptDir%\Config\potion1.txt
 }
 
 SavePotion2(){
-    FileDelete, potion2.txt
+    FileDelete, %A_ScriptDir%\Config\potion2.txt
     ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
-    FileAppend,%popo2%`n%couleur2%, potion2.txt
+    FileAppend, %popo2%`n%couleur2%, %A_ScriptDir%\Config\potion2.txt
 }
 
 SavePotion3(){
-    FileDelete, potion3.txt
+    FileDelete, %A_ScriptDir%\Config\potion3.txt
     ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
-    FileAppend,%popo3%`n%couleur3%, potion3.txt
+    FileAppend, %popo3%`n%couleur3%, %A_ScriptDir%\Config\potion3.txt
 }
 
 SavePotion4(){
-    FileDelete, potion4.txt
+    FileDelete, %A_ScriptDir%\Config\potion4.txt
     ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
-    FileAppend,%popo4%`n%couleur4%, potion4.txt
+    FileAppend, %popo4%`n%couleur4%, %A_ScriptDir%\Config\potion4.txt
 }
 
 
 LoadOptions() {
-    FilePath := "potionSpeedConfig.txt"
+    dossier := A_ScriptDir "\Config"
+    ; Vérifie si le dossier existe déjà
+    if !FileExist(dossier)
+    {
+        ; Crée le dossier s'il n'existe pas
+        FileCreateDir, %dossier%
+    }
+    FilePath := A_ScriptDir "\Config\potionSpeedConfig.txt"
     if (FileExist(FilePath)) {
         FileReadLine, duree1, %FilePath%, 1
         FileReadLine, duree2, %FilePath%, 2
@@ -105,7 +112,7 @@ LoadOptions() {
 }
 
 LoadPotion1() {
-    FilePath := "potion1.txt"
+    FilePath := A_ScriptDir "\Config\potion1.txt"
     if (FileExist(FilePath)) {
         FileReadLine, popo1, %FilePath%, 1
         FileReadLine, couleur1, %FilePath%, 2
@@ -119,7 +126,7 @@ LoadPotion1() {
 }
 
 LoadPotion2() {
-    FilePath := "potion2.txt"
+    FilePath := A_ScriptDir "\Config\potion2.txt"
     if (FileExist(FilePath)) {
         FileReadLine, popo2, %FilePath%, 1
         FileReadLine, couleur2, %FilePath%, 2
@@ -133,7 +140,7 @@ LoadPotion2() {
 }
 
 LoadPotion3() {
-    FilePath := "potion3.txt"
+    FilePath := A_ScriptDir "\Config\potion3.txt"
     if (FileExist(FilePath)) {
         FileReadLine, popo3, %FilePath%, 1
         FileReadLine, couleur3, %FilePath%, 2
@@ -148,15 +155,15 @@ LoadPotion3() {
 
 ;Supprime toutes les saves de potions
 DeleteAllPotion(){
-    FileDelete, potion1.txt
-    FileDelete, potion2.txt
-    FileDelete, potion3.txt
-    FileDelete, potion4.txt
+    FileDelete,%A_ScriptDir%\Config\potion1.txt
+    FileDelete,%A_ScriptDir%\Config\potion2.txt
+    FileDelete,%A_ScriptDir%\Config\potion3.txt
+    FileDelete,%A_ScriptDir%\Config\potion4.txt
 
 }
 
 LoadPotion4() {
-    FilePath := "potion4.txt"
+    FilePath := A_ScriptDir "\Config\potion4.txt"
     if (FileExist(FilePath)) {
         FileReadLine, popo4, %FilePath%, 1
         FileReadLine, couleur4, %FilePath%, 2
