@@ -339,9 +339,9 @@ Infos(){
     (LTrim
         CTRL + F9 : Sert a configurer les 4 timers des potions dans l'ordre 2, 3, 4, 5 `n
         CTRL + F2 : Sert a configurer la potion 2 `n
-        CTRL + F2 : Sert a configurer la potion 3 `n
-        CTRL + F2 : Sert a configurer la potion 4 `n
-        CTRL + F2 : Sert a configurer la potion 5 `n
+        CTRL + F3 : Sert a configurer la potion 3 `n
+        CTRL + F4 : Sert a configurer la potion 4 `n
+        CTRL + F5 : Sert a configurer la potion 5 `n
         CTRL + ALT + F10 : Sert a Supprimer toutes les configs des potions pas des timers `n
         XButton2 : Sert a mettre le script en pause
 
