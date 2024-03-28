@@ -31,7 +31,7 @@ lifeMaxOffset := 0x1A4
 
 lifeOffset := 0x1A8
 
-; CheckForUpdates()
+CheckForUpdates()
 ;Load toutes les options save
 LoadOptions()
 
