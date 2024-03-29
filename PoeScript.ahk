@@ -5,8 +5,13 @@
 pourcentage_seuil_vie := 50
 pourcentage_seuil_mana := 30
 
-global staticAdress := 0x2DF0E20
-global staticAdressReservation := 0x3057598
+staticAdress := 0x316BBD8
+staticAdressReservation := 0x316F548
+
+
+staticOffsetAll := [0x28, 0x58, 0x50, 0x30, 0x20, 0x190]
+reservationOffset := [0x90, 0x90, 0x30, 0x30, 0x1E0, 0x48, 0x2A8]
+
 global manaSave
 global duree1
 global duree2
@@ -21,7 +26,6 @@ global couleur2
 global couleur3
 global couleur4
 
-staticOffsetAll := [0x0, 0x130, 0x240, 0x8, 0x10, 0x20]
 
 manaMaxOffset := 0x1F4
 
@@ -73,7 +77,7 @@ Loop{
     lifeResult := mem.read(mem.BaseAddress + staticAdress, "UInt", staticOffsetAll[1], staticOffsetAll[2], staticOffsetAll[3], staticOffsetAll[4], staticOffsetAll[5], staticOffsetAll[6], lifeOffset)
     life := lifeResult + 0 ; Conversion explicite en nombre entier
 
-    reservManaResult := mem.read(mem.BaseAddress + staticAdressReservation, "UInt", 0x90, 0x90, 0x30, 0x30, 0x1E8, 0x28, 0x2A0)
+    reservManaResult := mem.read(mem.BaseAddress + staticAdressReservation, "UInt", reservationOffset[1], reservationOffset[2], reservationOffset[3], reservationOffset[4], reservationOffset[5], reservationOffset[6], reservationOffset[7])
     reservMana := reservManaResult + 0 ; Conversion explicite en nombre entier
 
     manaMax -= reservMana
