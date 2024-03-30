@@ -5,8 +5,8 @@
 pourcentage_seuil_vie := 50
 pourcentage_seuil_mana := 30
 
-staticAdress := 0x316BBD8
-staticAdressReservation := 0x316F548
+staticAdress := 0x316BBC8
+staticAdressReservation := 0x316F538
 
 
 staticOffsetAll := [0x28, 0x58, 0x50, 0x30, 0x20, 0x190]
