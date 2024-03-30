@@ -302,7 +302,7 @@ Update(){
     ; Supprime le fichier zip et le dossier update
     FileDelete, %A_ScriptDir%\update.zip
     FileRemoveDir, %A_ScriptDir%\update, 1
-    MsgBox, Mise a jour terminé !
+    MsgBox, Mise a jour termine ! FDP
     Reload
     Return
 }
