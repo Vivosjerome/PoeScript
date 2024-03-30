@@ -354,3 +354,15 @@ Infos(){
 
     )
 }
+
+; Sert a creer un tolerence sur les couleurs
+ColorWithTolerance(reference_color, color, tolerance) {
+    r_diff := ((reference_color & 0xFF) - (color & 0xFF))
+    g_diff := (((reference_color >> 8) & 0xFF) - ((color >> 8) & 0xFF))
+    b_diff := (((reference_color >> 16) & 0xFF) - ((color >> 16) & 0xFF))
+    
+    distance := sqrt(r_diff ** 2 + g_diff ** 2 + b_diff ** 2)
+    
+    return (distance <= tolerance)
+}
+

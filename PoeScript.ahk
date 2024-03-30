@@ -8,7 +8,6 @@ pourcentage_seuil_mana := 30
 staticAdress := 0x316BBC8
 staticAdressReservation := 0x316F538
 
-
 staticOffsetAll := [0x28, 0x58, 0x50, 0x30, 0x20, 0x190]
 reservationOffset := [0x90, 0x90, 0x30, 0x30, 0x1E0, 0x48, 0x2A8]
 
@@ -25,7 +24,6 @@ global couleur1
 global couleur2
 global couleur3
 global couleur4
-
 
 manaMaxOffset := 0x1F4
 
@@ -92,36 +90,36 @@ Loop{
     }
 
     ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-    if (mana < seuil_mana) {
+    else if (mana < seuil_mana) {
         takeMana()
     }
-    ; else if ((couleur1 == popo1) && duree1 != 0x99D7F9) {
-    ;     Send, 2
-    ;     Sleep, 100
+
+    ; if (couleur1){
+    ;     if (ColorWithTolerance(popo1, couleur1, 50) && duree1 != 0x99D7F9) {
+    ;         Send, 2
+    ;         Sleep, 100
+    ;     }
     ; }
 
     ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-    else if ((couleur2 == popo2) && duree2 != 0x99D7F9) {
-        Send, 3
-        Sleep, 100
+    else if (couleur2 && ColorWithTolerance(popo2, couleur2, 5) && duree2 != 0x99D7F9) {
+            Send, 3
+            Sleep, 100
     }
 
     ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-    else if ((couleur3 == popo3) && duree3 != 0x99D7F9 && duree4 != 0x99D7F9) {
+    else if (couleur3 && ColorWithTolerance(popo3, couleur3, 5) && duree3 != 0x99D7F9 && duree4 != 0x99D7F9) {
         Send, 4
         Sleep, 100
-    } 
+    }
 
-    ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-    else if ((couleur4 == popo4) && duree4 != 0x99D7F9 && duree3 != 0x99D7F9) {
+    else if (couleur4 && ColorWithTolerance(popo4, couleur4, 5) && duree4 != 0x99D7F9 && duree3 != 0x99D7F9) {
         Send, 5
         Sleep, 100
     }
-
-    Sleep, 100
-
 }
 return
+
 F1::Infos()
 F2::reload
 
