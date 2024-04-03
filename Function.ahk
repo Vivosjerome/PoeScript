@@ -297,7 +297,7 @@ Update(){
     ; Supprime le fichier zip et le dossier update
     FileDelete, %A_ScriptDir%\update.zip
     FileRemoveDir, %A_ScriptDir%\update, 1
-    MsgBox, Mise a jour termine ! FDP
+    MsgBox, Mise a jour termine ! GROS FDP !
     Reload
     Return
 }
@@ -329,7 +329,7 @@ CheckForUpdates() {
 
     if (onlineVersion > localVersion) {
         ; Une mise à jour est disponible
-        MsgBox, 1, Mise à jour, Une mise à jour est disponible. Voulez-vous mettre à jour maintenant?
+        MsgBox, 1, Mise a jour, Une mise a jour est disponible. Voulez-vous mettre a jour maintenant?
         IfMsgBox Ok
         Update()
     }
