@@ -5,8 +5,8 @@
 pourcentage_seuil_vie := 50
 pourcentage_seuil_mana := 30
 
-staticAdress := 0x316BBC8
-staticAdressReservation := 0x316F538
+staticAdress := 0x317A028
+staticAdressReservation := 0x317D978
 
 staticOffsetAll := [0x28, 0x58, 0x50, 0x30, 0x20, 0x190]
 reservationOffset := [0x90, 0x90, 0x30, 0x30, 0x1E0, 0x48, 0x2A8]
@@ -89,26 +89,23 @@ Loop{
         takeLife()
     }
 
-    ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-    else if (mana < seuil_mana) {
+    if (couleur1 && ColorWithTolerance(popo1, couleur1, 5) && duree1 != 0x99D7F9) {
+        Send, 2
+        Sleep, 100
+    }
+    
+    else if (!couleur1 && mana < seuil_mana) {
         takeMana()
-    }
-
-    ; if (couleur1){
-    ;     if (ColorWithTolerance(popo1, couleur1, 50) && duree1 != 0x99D7F9) {
-    ;         Send, 2
-    ;         Sleep, 100
-    ;     }
-    ; }
+    } 
 
     ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-    else if (couleur2 && ColorWithTolerance(popo2, couleur2, 5) && duree2 != 0x99D7F9) {
-            Send, 3
-            Sleep, 100
+    if (couleur2 && ColorWithTolerance(popo2, couleur2, 5) && duree2 != 0x99D7F9) {
+        Send, 3
+        Sleep, 100
     }
 
     ; Vérifier si une des potions de vitesse est en cours et lance la potion si ce n'est pas le cas
-    else if (couleur3 && ColorWithTolerance(popo3, couleur3, 5) && duree3 != 0x99D7F9 && duree4 != 0x99D7F9) {
+    if (couleur3 && ColorWithTolerance(popo3, couleur3, 5) && duree3 != 0x99D7F9 && duree4 != 0x99D7F9) {
         Send, 4
         Sleep, 100
     }
@@ -125,11 +122,18 @@ F2::reload
 
 ^F9::SaveSpeed()
 
+; Save la position des potions et leurs couleurs
 ^F2::Potion1()
 ^F3::Potion2()
 ^F4::Potion3()
 ^F5::Potion4()
-^!F10::DeleteAllPotion()
+
+; Définit la hotkey Ctrl + Alt + F... pour supprimer la potion 1, 2, 3 ou 4
+^!F2::DeletePotion(1)
+^!F3::DeletePotion(2)
+^!F4::DeletePotion(3)
+^!F5::DeletePotion(4)
+
 
 XButton2::
     Suspend

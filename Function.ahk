@@ -27,7 +27,7 @@ global Y_Potion4
 
 ; Enregistrement des options dans un fichier
 SavePotionSpeed() {
-    FileDelete,  %A_ScriptDir%\Config\potionSpeedConfig.txt
+    FileDelete, %A_ScriptDir%\Config\potionSpeedConfig.txt
     ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
     FileAppend,%duree1%`n%duree2%`n%duree3%`n%duree4%, %A_ScriptDir%\Config\potionSpeedConfig.txt
 }
@@ -37,19 +37,18 @@ SaveSpeed(){
     MsgBox, Appuyez sur OK, puis deplacez votre souris vers le timer des potions dans l'ordre. `nappuyez sur la touche Espace pour valider.
     Loop, 4{
 
-    ; Enregistrement et affichage de la position
-    Input, _, L1
-    MouseGetPos, X, Y
-    duree%A_Index% := X "," Y
+        ; Enregistrement et affichage de la position
+        Input, _, L1
+        MouseGetPos, X, Y
+        duree%A_Index% := X "," Y
 
-    ; Enregistrement des positions après les clics
-    SavePotionSpeed()
+        ; Enregistrement des positions après les clics
+        SavePotionSpeed()
 
     }
     MsgBox, timer sauvegarde.
-    
-}
 
+}
 
 SavePotion1(){
     FileDelete, %A_ScriptDir%\Config\potion1.txt
@@ -75,7 +74,6 @@ SavePotion4(){
     FileAppend, %popo4%`n%couleur4%, %A_ScriptDir%\Config\potion4.txt
 }
 
-
 LoadOptions() {
     dossier := A_ScriptDir "\Config"
     ; Vérifie si le dossier existe déjà
@@ -89,10 +87,10 @@ LoadOptions() {
         FileReadLine, duree1, %FilePath%, 1
         FileReadLine, duree2, %FilePath%, 2
         FileReadLine, duree3, %FilePath%, 3
-        FileReadLine, duree4, %FilePath%, 4  
+        FileReadLine, duree4, %FilePath%, 4 
     }
 
-      ; Initialiser les coordonnées X et Y pour chaque potion
+    ; Initialiser les coordonnées X et Y pour chaque potion
     CutePos(duree1)
     X_Duree1 := X
     Y_Duree1 := Y
@@ -153,13 +151,13 @@ LoadPotion3() {
 
 }
 
-;Supprime toutes les saves de potions
-DeleteAllPotion(){
-    FileDelete,%A_ScriptDir%\Config\potion1.txt
-    FileDelete,%A_ScriptDir%\Config\potion2.txt
-    FileDelete,%A_ScriptDir%\Config\potion3.txt
-    FileDelete,%A_ScriptDir%\Config\potion4.txt
-
+; Supprime une save de potion spécifique
+DeletePotion(potionNumber){
+    MsgBox, 4,, Es-tu sur de vouloir supprimer la configuration couleur de la potion %potionNumber% ?
+    IfMsgBox, Yes
+    {
+        FileDelete,%A_ScriptDir%\Config\potion%potionNumber%.txt
+    }
 }
 
 LoadPotion4() {
@@ -176,7 +174,6 @@ LoadPotion4() {
 
 }
 
-
 Potion1(){
 
     ; Message box avec instructions
@@ -187,7 +184,7 @@ Potion1(){
     MouseGetPos, X, Y
     popo1 := X "," Y
     PixelGetColor, couleur1, %X%, %Y%
-    
+
     MsgBox, Potion sauvegarde.
 
     ; Enregistrement des positions après les clics
@@ -204,7 +201,7 @@ Potion2(){
     MouseGetPos, X, Y
     popo2 := X "," Y
     PixelGetColor, couleur2, %X%, %Y%
-    
+
     MsgBox, Potion sauvegarde.
 
     ; Enregistrement des positions après les clics
@@ -221,7 +218,7 @@ Potion3(){
     MouseGetPos, X, Y
     popo3 := X "," Y
     PixelGetColor, couleur3, %X%, %Y%
-    
+
     MsgBox, Potion sauvegarde.
 
     ; Enregistrement des positions après les clics
@@ -238,14 +235,12 @@ Potion4(){
     MouseGetPos, X, Y
     popo4 := X "," Y
     PixelGetColor, couleur4, %X%, %Y%
-    
+
     MsgBox, Potion sauvegarde.
 
     ; Enregistrement des positions après les clics
     SavePotion4()
 }
-
-
 
 takeLife(){
     Send, 1
@@ -340,18 +335,19 @@ CheckForUpdates() {
     }
 }
 
-
 Infos(){
     MsgBox, 0, Informations, 
     (LTrim
-        CTRL + F9 : Sert a configurer les 4 timers des potions dans l'ordre 2, 3, 4, 5 `n
-        CTRL + F2 : Sert a configurer la potion 2 `n
-        CTRL + F3 : Sert a configurer la potion 3 `n
-        CTRL + F4 : Sert a configurer la potion 4 `n
-        CTRL + F5 : Sert a configurer la potion 5 `n
-        CTRL + ALT + F10 : Sert a Supprimer toutes les configs des potions pas des timers `n
-        XButton2 : Sert a mettre le script en pause
-
+    CTRL + F9 : Sert a configurer les 4 timers des potions dans l'ordre 2, 3, 4, 5 `n
+    CTRL + F2 : Sert a configurer la potion 2 `n
+    CTRL + F3 : Sert a configurer la potion 3 `n
+    CTRL + F4 : Sert a configurer la potion 4 `n
+    CTRL + F5 : Sert a configurer la potion 5 `n
+    CTRL + ALT + F2 : Sert a Supprimer la config de la potion 2 `n
+    CTRL + ALT + F3 : Sert a Supprimer la config de la potion 3 `n
+    CTRL + ALT + F4 : Sert a Supprimer la config de la potion 4 `n
+    CTRL + ALT + F5 : Sert a Supprimer la config de la potion 5 `n
+    XButton2 : Sert a mettre le script en pause
     )
 }
 
@@ -360,9 +356,9 @@ ColorWithTolerance(reference_color, color, tolerance) {
     r_diff := ((reference_color & 0xFF) - (color & 0xFF))
     g_diff := (((reference_color >> 8) & 0xFF) - ((color >> 8) & 0xFF))
     b_diff := (((reference_color >> 16) & 0xFF) - ((color >> 16) & 0xFF))
-    
+
     distance := sqrt(r_diff ** 2 + g_diff ** 2 + b_diff ** 2)
-    
+
     return (distance <= tolerance)
 }
 
