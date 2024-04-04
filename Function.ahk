@@ -25,6 +25,12 @@ global Y_Potion3
 global X_Potion4
 global Y_Potion4
 
+global X_Position1
+global Y_Position1
+
+global X_Position2
+global Y_Position2
+
 ; Enregistrement des options dans un fichier
 SavePotionSpeed() {
     FileDelete, %A_ScriptDir%\Config\potionSpeedConfig.txt
@@ -297,7 +303,7 @@ Update(){
     ; Supprime le fichier zip et le dossier update
     FileDelete, %A_ScriptDir%\update.zip
     FileRemoveDir, %A_ScriptDir%\update, 1
-    MsgBox, Mise a jour termine ! GROS FDP !
+    MsgBox, Mise a jour termine ! FDP
     Reload
     Return
 }
@@ -329,7 +335,7 @@ CheckForUpdates() {
 
     if (onlineVersion > localVersion) {
         ; Une mise à jour est disponible
-        MsgBox, 1, Mise a jour, Une mise a jour est disponible. Voulez-vous mettre a jour maintenant?
+        MsgBox, 1, Mise à jour, Une mise à jour est disponible. Voulez-vous mettre à jour maintenant?
         IfMsgBox Ok
         Update()
     }
@@ -362,3 +368,61 @@ ColorWithTolerance(reference_color, color, tolerance) {
     return (distance <= tolerance)
 }
 
+SaveChaosRecipe(){
+    FileDelete, %A_ScriptDir%\Config\chaosRecipe.txt
+    ; Utiliser un caractère spécial (par exemple, "`n") pour séparer les valeurs sur la même ligne
+    FileAppend, %position1%`n%position2%, %A_ScriptDir%\Config\chaosRecipe.txt
+}
+
+LoadOptionChaosRecipe() {
+    FilePath := A_ScriptDir "\Config\chaosRecipe.txt"
+    if (FileExist(FilePath)) {
+        FileReadLine, position1, %FilePath%, 1
+        FileReadLine, position2, %FilePath%, 2
+    }
+
+    CutePos(position1)
+    X_Position1 := X
+    Y_Position1 := Y
+
+    CutePos(position2)
+    X_Position2 := X
+    Y_Position2 := Y
+
+}
+
+global position1
+global position2
+
+ChaosRecipeSetZone(){
+
+    MsgBox, Appuyez sur OK, puis deplacez votre souris sur la zone en haut a gauche du coffre puis en bas a droite . `nappuyez sur la touche Espace pour valider.
+
+    Loop, 2{
+
+        ; Enregistrement et affichage de la position
+        Input, _, L1
+        MouseGetPos, X, Y
+        position%A_Index% := X "," Y
+
+        ; Enregistrement des positions après les clics
+        SaveChaosRecipe()
+
+    }
+
+    MsgBox, position sauvegarde.
+
+}
+
+ChaosRecipeAuto(){
+    Loop, 20 {
+        PixelSearch, posX, posY, X_Position1, Y_Position1, X_Position2, Y_Position2, 0x8000FF, , Fast
+        if (posX && posY) {
+            MouseMove, posX+5, posY+5
+            Send, {CtrlDown}
+            Click
+            Sleep, 100
+        }
+        send, {CtrlUp}
+    }
+}

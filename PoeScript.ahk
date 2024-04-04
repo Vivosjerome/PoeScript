@@ -5,8 +5,8 @@
 pourcentage_seuil_vie := 50
 pourcentage_seuil_mana := 30
 
-staticAdress := 0x317A028
-staticAdressReservation := 0x317D978
+staticAdress := 0x317A008
+staticAdressReservation := 0x317D958
 
 staticOffsetAll := [0x28, 0x58, 0x50, 0x30, 0x20, 0x190]
 reservationOffset := [0x90, 0x90, 0x30, 0x30, 0x1E0, 0x48, 0x2A8]
@@ -33,7 +33,7 @@ lifeMaxOffset := 0x1A4
 
 lifeOffset := 0x1A8
 
-CheckForUpdates()
+; CheckForUpdates()
 ;Load toutes les options save
 LoadOptions()
 
@@ -41,6 +41,7 @@ LoadPotion1()
 LoadPotion2()
 LoadPotion3()
 LoadPotion4()
+LoadOptionChaosRecipe()
 
 Loop{
 
@@ -119,8 +120,11 @@ return
 
 F1::Infos()
 F2::reload
+F3::ChaosRecipeAuto()
 
+^F8::ChaosRecipeSetZone()
 ^F9::SaveSpeed()
+
 
 ; Save la position des potions et leurs couleurs
 ^F2::Potion1()
