@@ -1,12 +1,11 @@
 #NoEnv
 #Include, classMemory.ahk
 
-; Définir les pourcentages seuils pour la vie et le mana
 pourcentage_seuil_vie := 50
 pourcentage_seuil_mana := 30
 
 staticAdress := 0x317A008
-staticAdressReservation := 0x317D958
+staticAdressReservation := 0x317D978
 
 staticOffsetAll := [0x28, 0x58, 0x50, 0x30, 0x20, 0x190]
 reservationOffset := [0x90, 0x90, 0x30, 0x30, 0x1E0, 0x48, 0x2A8]
