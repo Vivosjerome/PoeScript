@@ -2,8 +2,8 @@
 #Include, classMemory.ahk
 
 
-global staticAdress := 0x3187B78
-global staticAdressReservation := 0x318B4E8
+global staticAdress := 0x318AB88
+global staticAdressReservation := 0x318E4E8
 
 global manaSave :=
 global reservationSave :=
