@@ -1,7 +1,7 @@
 #NoEnv
 #Include, classMemory.ahk
 
-pourcentage_seuil_vie := 50
+pourcentage_seuil_vie := 40
 pourcentage_seuil_mana := 30
 
 staticAdress := 0x318ABA8
@@ -137,6 +137,7 @@ F3::ChaosRecipeAuto()
 ^!F4::DeletePotion(3)
 ^!F5::DeletePotion(4)
 
+MButton::AuraUp()
 
 XButton2::
     Suspend

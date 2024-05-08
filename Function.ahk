@@ -259,6 +259,14 @@ takeMana(){
     Sleep, 200
 }
 
+AuraUp(){
+    Send, ^a
+    Send, ^z
+    Send, ^e
+    Send, ^r
+    Send, ^t
+}
+
 GLOBAL X
 GLOBAL Y
 CutePos(potion) {
