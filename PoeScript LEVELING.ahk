@@ -110,14 +110,14 @@ Loop{
         Sleep, 100
     }
 
-    ; else if (couleur4 && ColorWithTolerance(popo4, couleur4, 5) && duree4 != 0x99D7F9 && duree3 != 0x99D7F9) {
-    ;     Send, 5
-    ;     Sleep, 100
-    ; }
-    if (couleur4 && ColorWithTolerance(popo4, couleur4, 5) && duree4 != 0x99D7F9) {
+    else if (couleur4 && ColorWithTolerance(popo4, couleur4, 5) && duree4 != 0x99D7F9 && duree3 != 0x99D7F9) {
         Send, 5
         Sleep, 100
     }
+    ; if (couleur4 && ColorWithTolerance(popo4, couleur4, 5) && duree4 != 0x99D7F9) {
+    ;     Send, 5
+    ;     Sleep, 100
+    ; }
 }
 return
 

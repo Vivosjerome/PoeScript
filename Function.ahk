@@ -259,16 +259,10 @@ takeMana(){
     Sleep, 200
 }
 
-AuraUp(){
-    Send, ^a
-    Send, ^z
-    Send, ^e
-    Send, ^r
-    Send, ^t
-}
 
 GLOBAL X
 GLOBAL Y
+
 CutePos(potion) {
     ; Extraire les coordonnées X et Y de la potion
     Coord := StrSplit(potion, ",")
@@ -424,7 +418,7 @@ ChaosRecipeSetZone(){
 
 ChaosRecipeAuto(){
     Loop, 20 {
-        PixelSearch, posX, posY, X_Position1, Y_Position1, X_Position2, Y_Position2, 0x8000FF, , Fast
+        PixelSearch, posX, posY, X_Position1, Y_Position1, X_Position2, Y_Position2, 0xFF00FF, , Fast
         if (posX && posY) {
             MouseMove, posX+5, posY+5
             Send, {CtrlDown}
