@@ -78,7 +78,7 @@ Loop{
     reservManaResult := mem.read(mem.BaseAddress + staticAdressReservation, "UInt", reservationOffset[1], reservationOffset[2], reservationOffset[3], reservationOffset[4], reservationOffset[5], reservationOffset[6], reservationOffset[7])
     reservMana := reservManaResult + 0 ; Conversion explicite en nombre entier
 
-    if (!life && !lifeMax && !mana && !manaMax) {
+    if (!manaMax) {
     Msgbox, Les adresses statiques ont change!
     ExitApp
     }
