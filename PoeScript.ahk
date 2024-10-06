@@ -1,6 +1,9 @@
 #NoEnv
 #Include, classMemory.ahk
 
+SysGet, MonitorWidth, 78 ; Récupere la résolution X de l'écran
+Middle := Floor(MonitorWidth / 2) ; Divise par deux pour avoir le millieu
+
 pourcentage_seuil_vie := 40
 pourcentage_seuil_mana := 30
 
@@ -60,9 +63,6 @@ Loop{
     PixelGetColor, duree3, X_Duree3, Y_Duree3
     PixelGetColor, duree4, X_Duree4, Y_Duree4
 
-    ; Afficher les valeurs sur l'écran
-    ToolTip, %reservMana%`n%life%/%lifeMax%`n%mana%/%manaMax%, 115, 720
-
     manaMaxResult := mem.read(mem.BaseAddress + staticAdress, "UInt", staticOffsetAll[1], staticOffsetAll[2], staticOffsetAll[3], staticOffsetAll[4], staticOffsetAll[5], staticOffsetAll[6], manaMaxOffset)
     manaMax := manaMaxResult + 0 ; Conversion explicite en nombre entier
 
@@ -77,6 +77,11 @@ Loop{
 
     reservManaResult := mem.read(mem.BaseAddress + staticAdressReservation, "UInt", reservationOffset[1], reservationOffset[2], reservationOffset[3], reservationOffset[4], reservationOffset[5], reservationOffset[6], reservationOffset[7])
     reservMana := reservManaResult + 0 ; Conversion explicite en nombre entier
+
+    if (!life && !lifeMax && !mana && !manaMax) {
+    Msgbox, Les adresses statiques ont change!
+    ExitApp
+    }
 
     manaMax -= reservMana
 
@@ -141,13 +146,14 @@ F3::ChaosRecipeAuto()
 ^!F4::DeletePotion(3)
 ^!F5::DeletePotion(4)
 
+
 XButton2::
     Suspend
     Pause ,,1
     if A_IsPaused {
-        ToolTip, PAUSED, 960, 1,
+        ToolTip, PAUSED, %Middle%, 1,
     } else {
-        ToolTip, RUNNING, 960, 1,
+        ToolTip, RUNNING, %Middle%, 1,
         SetTimer RemoveToolTip,
     }
 return

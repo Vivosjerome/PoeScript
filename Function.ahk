@@ -423,7 +423,7 @@ ChaosRecipeAuto(){
             MouseMove, posX+5, posY+5
             Send, {CtrlDown}
             Click
-            Sleep, 100
+            Sleep, 10
         }
         send, {CtrlUp}
     }
